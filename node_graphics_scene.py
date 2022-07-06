@@ -24,12 +24,12 @@ class QDMGraphicsScene(QGraphicsScene):
 
         self.scene_width, self.scene_height = 64000, 64000
 
-        self.setSceneRect(
-            -self.scene_width // 2,
-            self.scene_height // 2,
-            self.scene_width,
-            self.scene_height,
-        )
+        # self.setSceneRect(
+        #     -self.scene_width // 2,
+        #     self.scene_height // 2,
+        #     self.scene_width,
+        #     self.scene_height,
+        # )
 
         self.setBackgroundBrush(self._color_background)
 
