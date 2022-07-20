@@ -12,8 +12,8 @@ class QDMGraphicsNode(QGraphicsItem):
         self._title_color = Qt.white
         self._title_font = QFont("Ubuntu", 10)
 
-        self.width = 180
-        self.height = 240
+        self.width = 200
+        self.height = 270
         self.edge_size = 10
         self.title_height = 24
         self._padding = 4.0
@@ -28,6 +28,7 @@ class QDMGraphicsNode(QGraphicsItem):
         self.title = self.node.title
 
         # init sockets
+        self.initSockets()
 
 
         # init content
@@ -54,8 +55,8 @@ class QDMGraphicsNode(QGraphicsItem):
     def boundingRect(self):
         return QRectF(0,
                       0,
-                      2*self.edge_size+ self.width,
-                      2* self.edge_size + self.height
+                      self.width,
+                      self.height
                       ).normalized()
 
     def initTitle(self):
@@ -70,6 +71,10 @@ class QDMGraphicsNode(QGraphicsItem):
         self.grContent = QGraphicsProxyWidget(self)
         self.content.setGeometry(self.edge_size, self.title_height + self.edge_size, self.width - 2 * self.edge_size, self.height - 2* self.edge_size- self.title_height)
         self.grContent.setWidget(self.content)
+
+    def initSockets(self):
+        pass
+
 
 
     def paint(self, painter: QPainter, option: 'QStyleOptionGraphicsItem', widget) -> None:
@@ -102,3 +107,4 @@ class QDMGraphicsNode(QGraphicsItem):
         painter.setPen(self._pen_default if not self.isSelected() else self._pen_selected)
         painter.setBrush(Qt.NoBrush)
         painter.drawPath(path_outline.simplified())
+
