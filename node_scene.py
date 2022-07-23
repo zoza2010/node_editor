@@ -1,4 +1,7 @@
 from node_graphics_scene import QDMGraphicsScene
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Scene(object):
     def __init__(self):

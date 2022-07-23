@@ -1,6 +1,9 @@
 from node_graphics_node import QDMGraphicsNode
 from node_content_widget import QDMNodeContentWidget
 from node_socket import Socket, LEFT_TOP, RIGHT_TOP, LEFT_BOTTOM, RIGHT_BOTTOM
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Node():
     def __init__(self, scene, title="Undefined Node", inputs=[], outputs=[]):
@@ -49,6 +52,6 @@ class Node():
         else:
             # start from top
             y = self.grNode.title_height + self.grNode._padding + self.grNode.edge_size + index * self.socket_spacing
-        return x, y
+        return [x, y]
 
 

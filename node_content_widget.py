@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import logging
 
+logger = logging.getLogger(__name__)
 
 class QDMNodeContentWidget(QWidget):
     def __init__(self, parent=None):

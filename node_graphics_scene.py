@@ -2,6 +2,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from math import floor, ceil
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class QDMGraphicsScene(QGraphicsScene):

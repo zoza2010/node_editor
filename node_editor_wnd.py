@@ -6,6 +6,9 @@ from node_scene import Scene
 from node_node import Node
 from node_edge import Edge
 from PyQt5.QtWidgets import *
+import logging
+
+logger = logging.getLogger(__name__)
 
 from node_graphics_scene import QDMGraphicsScene
 
@@ -68,7 +71,7 @@ class NodeEditorWnd(QWidget):
         proxy2.setPos(0, 60)
 
     def loadStylesheet(self, filename):
-        print("STYLE loading", filename)
+        logger.debug(["STYLE loading", filename])
         file = QFile(filename)
         file.open(QFile.ReadOnly | QFile.Text)
         stylesheet = file.readAll()

@@ -2,6 +2,9 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from node_graphics_edge import QDMGraphicsEdgeDirect, QDMGraphicsEdgeBezier
+import logging
+
+logger = logging.getLogger(__name__)
 
 EDGE_TYPE_DIRECT = 1
 EDGE_TYPE_BEZIER = 2
@@ -16,4 +19,39 @@ class Edge(object):
 
         self.grEdge = QDMGraphicsEdgeDirect(self) if type==EDGE_TYPE_DIRECT else QDMGraphicsEdgeBezier(self)
 
+        self.updatePositions()
+        logger.debug(["Edge: ", self.grEdge.posSource, self.grEdge.posDestination])
         self.scene.grScene.addItem(self.grEdge)
+
+
+    def updatePositions(self):
+        source_pos = self.start_socket.getSocketPosition()
+        source_pos[0] += self.start_socket.node.grNode.pos().x()
+        source_pos[1] += self.start_socket.node.grNode.pos().y()
+
+        self.grEdge.setSource(*source_pos)
+
+        if self.end_socket is not None:
+            end_pos = self.end_socket.getSocketPosition()
+            end_pos[0] += self.end_socket.node.grNode.pos().x()
+            end_pos[1] += self.end_socket.node.grNode.pos().y()
+            self.grEdge.setDestination(*end_pos)
+        self.grEdge.update()
+        logger.debug(["Start Socket: ", self.start_socket])
+        logger.debug(["End Socket: ", self.end_socket])
+
+    def remove_from_sockets(self):
+        if self.start_socket is not None:
+            self.start_socket.edge = None
+        if self.end_socket is not None:
+            self.end_socket.edge = None
+
+        self.start_socket = None
+        self.end_socket = None
+
+
+    def remove(self):
+        self.remove_from_sockets()
+        self.scene.grScene.removeItem(self.grEdge)
+        self.grEdge = None
+        self.scene.removeEdge(self)

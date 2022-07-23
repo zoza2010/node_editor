@@ -1,6 +1,9 @@
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+import logging
+
+logger = logging.getLogger(__name__)
 
 class QDMGraphicsEdge(QGraphicsPathItem):
     def __init__(self, edge, parent=None):
@@ -18,6 +21,12 @@ class QDMGraphicsEdge(QGraphicsPathItem):
 
         self.posSource = [0, 0]
         self.posDestination = [200, 100]
+
+    def setSource(self, x, y):
+        self.posSource = [x, y]
+
+    def setDestination(self, x, y):
+        self.posDestination = [x, y]
 
 
     def paint(self, painter: QPainter, option: 'QStyleOptionGraphicsItem', widget=None):
