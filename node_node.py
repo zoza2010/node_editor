@@ -26,16 +26,24 @@ class Node():
 
         counter = 0
         for item in inputs:
-            socket = Socket(node=self, index=counter, position=LEFT_BOTTOM)
+            socket = Socket(node=self, index=counter, position=LEFT_BOTTOM, socket_type=item)
             counter += 1
             self.inputs.append(socket)
 
 
         counter = 0
         for item in outputs:
-            socket = Socket(node=self, index=counter, position=RIGHT_TOP)
+            socket = Socket(node=self, index=counter, position=RIGHT_TOP, socket_type=item)
             counter += 1
             self.ouputs.append(socket)
+
+
+    def updateConnectedEdges(self):
+        for socket in self.inputs + self.ouputs:
+            if socket.hasEdge():
+                socket.edge.updatePositions()
+
+
 
     @property
     def pos(self):
